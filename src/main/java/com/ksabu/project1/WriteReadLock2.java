@@ -5,7 +5,14 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * @author ksabu00
+ * @auther ksabu00
+ * 多个线程同时读一个资源类没有任何问题，所以为了满足并发量，读取共享资源应该可以同时进行。
+ * 但是
+ * 如果有一个线程想去写共享资源来，就不应该再有其它线程可以对该资源进行读或写
+ * 小总结：
+ *          读-读能共存
+ *          读-写不能共存
+ *          写-写不能共存
  */
 
 class WriteRead2{
@@ -28,10 +35,10 @@ class WriteRead2{
     public void get(String key){
         lock.readLock().lock();
         try{
-            String value = null;
+            String result = null;
             System.out.println(Thread.currentThread().getName() + "\t" + "读取开始");
-            value = map.get(key);
-            System.out.println(Thread.currentThread().getName() + "\t" + "读取结束" + "\t" + value);
+            result = map.get(key);
+            System.out.println(Thread.currentThread().getName() + "\t" + "读取结束" + "\t" + result);
         }finally {
             lock.readLock().unlock();
         }

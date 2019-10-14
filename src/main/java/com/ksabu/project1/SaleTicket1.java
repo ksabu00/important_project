@@ -1,5 +1,7 @@
 package com.ksabu.project1;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -28,12 +30,20 @@ class Ticket1 {
 public class SaleTicket1 {
     public static void main(String[] args) {
         Ticket1 t = new Ticket1();
+        
         /**
          * Lambda Express（前提是函数式接口，只有一个方法）
          * 拷贝小括号，写死右箭头，落地大括号
          */
-        new Thread(() -> {for (int i = 1; i <= 40; i++)t.Sale();}, "A").start();
+       /* new Thread(() -> {for (int i = 1; i <= 40; i++)t.Sale();}, "A").start();
 		new Thread(() -> {for (int i = 1; i <= 40; i++)t.Sale();}, "B").start();
-		new Thread(() -> {for (int i = 1; i <= 40; i++)t.Sale();}, "C").start();
+		new Thread(() -> {for (int i = 1; i <= 40; i++)t.Sale();}, "C").start();*/
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 40; i++) {
+            executorService.submit(() -> {
+                t.Sale();
+            });
+        }
+        executorService.shutdown();
     }
 }
