@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
  * 实现两个方法
  */
 public abstract  class ZkAbstractTemplateLock implements ZKLock {
-    // 连接zookeeper服务器
+    // 连接zookeeper服务器 一定要加端口
     private static final String ZKSERVER = "47.102.100.157:2181";
     private static final int TIME_OUT = 45 * 1000;
     protected String path = "/tempzk";
