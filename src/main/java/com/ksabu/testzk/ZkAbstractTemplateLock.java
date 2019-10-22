@@ -38,6 +38,7 @@ public abstract  class ZkAbstractTemplateLock implements ZKLock {
     @Override
     public void unlock() {
         if (zkClient != null){
+
             zkClient.close();// 等价于在zk服务器上执行quit命令
         }
         //System.out.println(Thread.currentThread().getName() + "\t" + "释放锁成功");
