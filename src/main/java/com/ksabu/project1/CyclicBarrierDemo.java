@@ -15,7 +15,7 @@ public class CyclicBarrierDemo {
             System.out.println(Thread.currentThread().getName() + "\t 末线程执行");
         });
 
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 7; i++) {
             int finalI = i;
             new Thread(() -> {
                 System.out.println(Thread.currentThread().getName() + "\t 当前执行的线程为：" + finalI);
